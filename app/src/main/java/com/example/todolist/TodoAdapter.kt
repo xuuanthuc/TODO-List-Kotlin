@@ -27,14 +27,14 @@ class TodoAdapter(val context: Context, val items: ArrayList<TODOClass>): Recycl
         var items = items.get(position)
         holder.tvTodo.text = items.todo
         holder.ivUpdate.setOnClickListener {
-//            if(context is MainActivity){
-//                context.updateTODO(items)
-//            }
+            if(context is MainActivity){
+                context.updateTODO(items)
+            }
         }
         holder.ivDelete.setOnClickListener {
-//            if(context is MainActivity){
-//                context.deleteTODO(items)
-//            }
+            if(context is MainActivity){
+                context.deleteTODO(items)
+            }
         }
     }
 

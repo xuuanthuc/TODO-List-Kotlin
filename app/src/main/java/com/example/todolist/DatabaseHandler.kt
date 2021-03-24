@@ -13,7 +13,6 @@ class DatabaseHandler(context: Context) :
         private const val DATABASE_NAME = "TodoDatabase"
         private const val DATABASE_VERSION = 1
         private const val TABLE_TODO = "todoTable"
-
         private const val KEY_ID = "_id"
         private const val KEy_TODO = "todo"
 
@@ -21,12 +20,12 @@ class DatabaseHandler(context: Context) :
 
     override fun onCreate(db: SQLiteDatabase?) {
         val CREATE_TODO_TABLE =
-            ("CREATE TABLE " + TABLE_TODO + "(" + KEY_ID + " INT PRIMARY KEY, " + KEy_TODO + " TEXT " + ")")
+            ("CREATE TABLE " + TABLE_TODO + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEy_TODO + " TEXT " + ")")
         db?.execSQL(CREATE_TODO_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db!!.execSQL("DROP TABLE IF EXISTS" + TABLE_TODO)
+        db!!.execSQL(" DROP TABLE IF EXISTS " + TABLE_TODO)
         onCreate(db)
     }
 
@@ -68,7 +67,7 @@ class DatabaseHandler(context: Context) :
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(KEy_TODO, todo.todo)
-        val success = db.update(TABLE_TODO, contentValues, KEY_ID + "=" + todo.id, null)
+        val success = db.update(TABLE_TODO, contentValues, KEY_ID + " = " + todo.id, null)
         db.close()
         return success
     }
@@ -76,7 +75,7 @@ class DatabaseHandler(context: Context) :
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(KEY_ID, todo.id)
-        val success = db.delete(TABLE_TODO, KEY_ID + "=" + todo.id, null)
+        val success = db.delete(TABLE_TODO, KEY_ID + " = " + todo.id, null)
         db.close()
         return success
     }
